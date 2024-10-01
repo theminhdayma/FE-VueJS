@@ -72,25 +72,34 @@
 <script setup>
 import { ref, reactive, computed, watch } from 'vue';
 
+// biến lưu tên công việc mới
 const newTask = ref('');
 
+// Mảng lưu tất cả các công việc
 const tasks = reactive([]);
 
+// Biến dùng ẩn hiện modal xác nhận xóa
 const showModal = ref(false);
+// Biến tạm lưu lại công việc cần xóa
 let taskToDelete = null;
 
+// Hàm tính số công việc đã hoàn thành 
 const completedTasks = computed(() => tasks.filter(task => task.status).length);
 
+// Lấy lại danh sách công việc từ local khi tải trang
 const loadTasks = () => {
   const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
   storedTasks.forEach(task => tasks.push(task));
 };
 
+// Lưu danh sách công việc lên local
 const saveTasks = () => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
+// Hàm thêm công việc
 const addTask = () => {
+  //Validate dữ liệu
   if (newTask.value.trim() === '') {
     alert('Tên công việc không được để trống!');
     return;
@@ -99,29 +108,34 @@ const addTask = () => {
     alert('Công việc đã tồn tại!');
     return;
   }
+  // Tạo 1 obj công việc mới
   tasks.push({
     id: Date.now(),
     name: newTask.value.trim(),
     status: false
   });
   newTask.value = '';
+  //Lưu lên local
   saveTasks(); 
 };
 
+// Hàm hiển thị modal xác nhận xóa
 const confirmDeleteTask = (index) => {
   showModal.value = true;
   taskToDelete = index;
 };
 
+// Hàm xóa công việc
 const deleteTask = () => {
   tasks.splice(taskToDelete, 1);
   saveTasks();
   showModal.value = false;
 };
 
+// Tải lại trang
 loadTasks();
 
-watch(tasks, saveTasks, { deep: true });
+// watch(tasks, saveTasks, { deep: false });
 </script>
 
 <style scoped>
