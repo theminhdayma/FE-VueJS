@@ -30,7 +30,6 @@
 <script setup>
 import { reactive } from 'vue';
 
-// Tạo đối tượng product lưu trữ thông tin sản phẩm
 const user = reactive({
   nameUser: '',
   email: '',
@@ -38,9 +37,8 @@ const user = reactive({
   confirmPassword: ""
 });
 
-// Hàm xử lý sự kiện khi nhấn nút "Thêm mới"
 const register = () => {
-  console.log(user); // In dữ liệu product ra console
+  console.log(user); 
 };
 </script>
 

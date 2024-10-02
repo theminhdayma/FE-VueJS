@@ -71,15 +71,12 @@ const errors = ref({
 const successMessage = ref('');
 const nameInput = ref(null);
 
-// Hàm kiểm tra email có tồn tại trong localStorage hay không
 const emailExists = (email) => {
   const users = JSON.parse(localStorage.getItem('users')) || [];
   return users.some(user => user.email === email);
 };
 
-// Hàm xử lý khi submit form
 const handleSubmit = () => {
-  // Reset errors
   errors.value = {
     name: '',
     email: '',
@@ -87,7 +84,6 @@ const handleSubmit = () => {
   };
   successMessage.value = '';
 
-  // Kiểm tra validation
   if (!form.value.name) {
     errors.value.name = 'Tên sinh viên không được để trống.';
   }
@@ -100,13 +96,11 @@ const handleSubmit = () => {
     errors.value.password = 'Mật khẩu không được để trống.';
   }
 
-  // Nếu không có lỗi nào, tiến hành lưu vào localStorage
   if (!errors.value.name && !errors.value.email && !errors.value.password) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     users.push({ ...form.value });
     localStorage.setItem('users', JSON.stringify(users));
 
-    // Xóa hết giá trị trong ô input
     form.value = {
       name: '',
       email: '',
@@ -114,10 +108,8 @@ const handleSubmit = () => {
       address: ''
     };
 
-    // Hiển thị thông báo thành công
     successMessage.value = 'Đăng ký tài khoản thành công';
 
-    // Focus vào ô input Tên sinh viên
     nameInput.value.focus();
   }
 };

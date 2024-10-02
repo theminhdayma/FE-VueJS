@@ -48,13 +48,11 @@ const errors = ref({
 const loginMessage = ref('');
 const loginSuccess = ref(false); 
 
-// Hàm kiểm tra email và mật khẩu có khớp với dữ liệu trong localStorage
 const checkCredentials = (email, password) => {
   const users = JSON.parse(localStorage.getItem('users')) || [];
   return users.find(user => user.email === email && user.password === password);
 };
 
-// Hàm xử lý đăng nhập
 const handleLogin = () => {
   errors.value = {
     email: '',
@@ -62,7 +60,6 @@ const handleLogin = () => {
   };
   loginMessage.value = '';
 
-  // Kiểm tra validation
   if (!loginForm.value.email) {
     errors.value.email = 'Email không được để trống.';
   }
@@ -70,7 +67,6 @@ const handleLogin = () => {
     errors.value.password = 'Mật khẩu không được để trống.';
   }
 
-  // Nếu không có lỗi validation, kiểm tra thông tin đăng nhập
   if (!errors.value.email && !errors.value.password) {
     const user = checkCredentials(loginForm.value.email, loginForm.value.password);
     
