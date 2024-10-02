@@ -45,7 +45,6 @@
       </table>
     </main>
 
-    <!-- Form thêm mới hoặc chỉnh sửa nhân viên -->
     <div v-if="showForm" class="overlay">
       <form class="form" @submit.prevent="addEmployee">
         <div class="d-flex justify-content-between align-items-center">
@@ -86,7 +85,6 @@
       </form>
     </div>
 
-    <!-- Modal xác nhận chặn/bỏ chặn -->
     <div v-if="showConfirmModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div class="bg-white rounded-lg shadow-lg p-6 w-11/12 max-w-md">
         <div class="flex justify-between items-center mb-4">
@@ -112,7 +110,6 @@
 <script setup>
 import { ref } from 'vue';
 
-// Khai báo các biến cần thiết
 const showForm = ref(false);
 const showConfirmModal = ref(false);
 const form = ref({
@@ -131,7 +128,7 @@ const currentEmployeeIndex = ref(null);
 // Hàm mở form thêm nhân viên
 const openAddForm = () => {
   showForm.value = true;
-  editIndex.value = null; // Reset edit index when adding a new employee
+  editIndex.value = null; 
   resetForm();
 };
 
@@ -145,10 +142,8 @@ const closeForm = () => {
 const addEmployee = () => {
   if (validateForm()) {
     if (editIndex.value !== null) {
-      // Update employee
       employees.value[editIndex.value] = { ...form.value };
     } else {
-      // Add new employee
       employees.value.push({ ...form.value });
     }
     localStorage.setItem('employees', JSON.stringify(employees.value));
@@ -238,7 +233,6 @@ const resetForm = () => {
 </script>
 
 <style scoped>
-/* Styling giữ nguyên như trong giao diện hiện tại */
 .table {
   width: 100%;
   border: 1px solid #ccc;
