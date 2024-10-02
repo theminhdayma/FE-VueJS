@@ -24,5 +24,5 @@ const viewDetails = () => {
 </script>
 
 <style scoped>
-/* Thêm CSS nếu cần */
+
 </style>

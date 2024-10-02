@@ -32,16 +32,14 @@ const address = ref('');
 
 const submitForm = () => {
   const newUser = { name: name.value, email: email.value, address: address.value };
-  // Emit the new user data to the parent component
   emit('addUser', newUser);
-  // Reset form fields after submission
   name.value = '';
   email.value = '';
   address.value = '';
 };
 
 const closeForm = () => {
-  emit('close'); // Emit close event to parent component
+  emit('close');
 };
 </script>
 

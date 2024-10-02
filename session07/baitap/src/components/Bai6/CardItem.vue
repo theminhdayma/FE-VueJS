@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-// Không cần script đặc biệt trong trường hợp này
+
 </script>
 
 <style scoped>

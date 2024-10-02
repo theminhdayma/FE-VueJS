@@ -20,7 +20,6 @@ const handleClose = () => {
   showForm.value = false;
 };
 
-// Để xử lý khi có người dùng mới được thêm, bạn có thể thêm hàm này sau
 const addUser = (newUser) => {
   users.value.push(newUser);
 };

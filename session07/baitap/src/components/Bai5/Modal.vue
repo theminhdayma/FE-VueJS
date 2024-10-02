@@ -11,7 +11,6 @@
 <script setup>
 import { ref, defineProps } from "vue";
 
-// Nhận props từ component cha
 const props = defineProps({
   title: {
     type: String,
@@ -19,10 +18,8 @@ const props = defineProps({
   },
 });
 
-// Khai báo biến để điều khiển việc hiển thị modal
 const isVisible = ref(true);
 
-// Phương thức để đóng modal
 const closeModal = () => {
   isVisible.value = false;
 };

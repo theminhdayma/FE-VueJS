@@ -45,11 +45,11 @@
       </table>
     </main>
 
-    <!-- Form thêm mới nhân viên -->
+    <!-- Form thêm mới hoặc chỉnh sửa nhân viên -->
     <div v-if="showForm" class="overlay">
       <form class="form" @submit.prevent="addEmployee">
         <div class="d-flex justify-content-between align-items-center">
-          <h4>Thêm mới nhân viên</h4>
+          <h4>{{ editIndex !== null ? 'Sửa nhân viên' : 'Thêm mới nhân viên' }}</h4>
           <i class="fa-solid fa-xmark" @click="closeForm"></i>
         </div>
         <div>
@@ -79,46 +79,38 @@
           </select>
         </div>
         <div>
-          <button class="w-100 btn btn-primary">Thêm mới</button>
+          <button class="w-100 btn btn-primary">
+            {{ editIndex !== null ? 'Cập nhật' : 'Thêm mới' }}
+          </button>
         </div>
       </form>
     </div>
 
     <!-- Modal xác nhận chặn/bỏ chặn -->
-    <div class="p-3">
-      <div v-if="showConfirmModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-11/12 max-w-md">
-          <div class="flex justify-between items-center mb-4">
-            <h4 class="text-lg font-semibold">Cảnh báo</h4>
-            <button @click="cancelAction" class="text-gray-500 hover:text-gray-800">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-          <p class="mb-4">Bạn có chắc chắn muốn chặn tài khoản này?</p>
-          <div class="flex justify-end space-x-4">
-            <button
-              @click="cancelAction"
-              class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded hover:bg-gray-200 transition duration-200"
-            >
-              Hủy
-            </button>
-            <button
-              @click="confirmAction"
-              class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200"
-            >
-              Xác nhận
-            </button>
-          </div>
+    <div v-if="showConfirmModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+      <div class="bg-white rounded-lg shadow-lg p-6 w-11/12 max-w-md">
+        <div class="flex justify-between items-center mb-4">
+          <h4 class="text-lg font-semibold">Cảnh báo</h4>
+          <button @click="cancelAction" class="text-gray-500 hover:text-gray-800">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <p class="mb-4">Bạn có chắc chắn muốn {{ currentAction }} tài khoản này?</p>
+        <div class="flex justify-end space-x-4">
+          <button @click="cancelAction" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded hover:bg-gray-200 transition duration-200">
+            Hủy
+          </button>
+          <button @click="confirmAction" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200">
+            Xác nhận
+          </button>
         </div>
       </div>
     </div>
-    
-
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
 // Khai báo các biến cần thiết
 const showForm = ref(false);
@@ -130,20 +122,16 @@ const form = ref({
   address: '',
   active: true,
 });
-const employees = ref([]);
+const employees = ref(JSON.parse(localStorage.getItem('employees')) || []);
 const errors = ref({});
 const editIndex = ref(null);
-const currentAction = ref('Chặn'); 
+const currentAction = ref('Chặn');
 const currentEmployeeIndex = ref(null);
-
-onMounted(() => {
-  loadEmployees();
-});
 
 // Hàm mở form thêm nhân viên
 const openAddForm = () => {
   showForm.value = true;
-  editIndex.value = null;
+  editIndex.value = null; // Reset edit index when adding a new employee
   resetForm();
 };
 
@@ -153,18 +141,16 @@ const closeForm = () => {
   resetForm();
 };
 
-// Hàm tải nhân viên từ localStorage
-const loadEmployees = () => {
-  const storedEmployees = localStorage.getItem('employees');
-  if (storedEmployees) {
-    employees.value = JSON.parse(storedEmployees);
-  }
-};
-
-// Hàm thêm nhân viên
+// Hàm thêm hoặc cập nhật nhân viên
 const addEmployee = () => {
   if (validateForm()) {
-    employees.value.push({ ...form.value });
+    if (editIndex.value !== null) {
+      // Update employee
+      employees.value[editIndex.value] = { ...form.value };
+    } else {
+      // Add new employee
+      employees.value.push({ ...form.value });
+    }
     localStorage.setItem('employees', JSON.stringify(employees.value));
     closeForm();
   }
@@ -198,10 +184,15 @@ const editEmployee = (index) => {
 
 // Hàm xóa nhân viên
 const deleteEmployee = (index) => {
-  if (confirm('Bạn có chắc chắn muốn xóa nhân viên này?')) {
-    employees.value.splice(index, 1);
-    localStorage.setItem('employees', JSON.stringify(employees.value));
-  }
+  currentEmployeeIndex.value = index;
+  showConfirmModal.value = true;
+  currentAction.value = 'xóa';
+};
+
+const confirmDeleteAction = () => {
+  employees.value.splice(currentEmployeeIndex.value, 1);
+  localStorage.setItem('employees', JSON.stringify(employees.value));
+  showConfirmModal.value = false;
 };
 
 // Hàm xác thực form
@@ -246,162 +237,62 @@ const resetForm = () => {
 };
 </script>
 
-
-
 <style scoped>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Styling giữ nguyên như trong giao diện hiện tại */
+.table {
+  width: 100%;
+  border: 1px solid #ccc;
 }
 
-.modal-content {
+.form {
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  text-align: center;
-}
-
-.form-control {
-  width: 350px;
-}
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-size: 14px;
-  font-family: sans-serif;
-}
-
-.fa-arrows-rotate {
-  font-size: 20px;
-  cursor: pointer;
-  color: gray;
-}
-
-.fa-arrows-rotate:hover {
-  color: rgb(184, 180, 180);
-  transform: rotate(20deg);
-  transition: all 0.5s linear;
-}
-
-.button {
-  padding: 4px 12px;
-  line-height: 30px;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-}
-
-.button-edit {
-  background-color: orange;
-}
-
-.button-delete {
-  background-color: red;
-}
-
-.button-block {
-  background-color: green;
-}
-
-td:first-child,
-td:nth-child(6),
-td:nth-child(7) {
-  text-align: center;
-}
-
-.form-select {
-  width: 270px !important;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 400px;
 }
 
 .overlay {
   position: fixed;
   top: 0;
+  left: 0;
   right: 0;
   bottom: 0;
-  left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.form {
-  background-color: #fff;
-  width: 500px;
-  padding: 20px 24px;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.form-label {
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.fa-xmark {
-  font-size: 20px;
+.button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
+.button-edit {
+  background-color: #ffc107;
+}
+
+.button-delete {
+  background-color: #dc3545;
+}
+
 .error {
-  color: red !important;
+  color: red;
 }
 
-.status-container {
-  border: 1px solid #dadada;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-.status {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  border: 1px solid transparent;
-}
-
-.modal-custom {
-  background-color: #fff;
-  padding: 20px 24px;
-  border-radius: 4px;
-  width: 400px;
-}
-
-.modal-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.modal-body-custom {
-  padding: 20px 0;
-}
-
-.modal-footer-custom {
-  display: flex;
-  justify-content: end;
-  gap: 8px;
-}
-
-.pagination {
-  margin-bottom: 0;
-}
 .status-active {
   color: green;
 }
+
 .status-stop {
   color: red;
 }

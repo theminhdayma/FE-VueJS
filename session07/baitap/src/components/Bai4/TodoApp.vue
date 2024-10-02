@@ -13,19 +13,17 @@
 import TodoItem from "./TodoItem.vue";
 import { ref } from "vue";
 
-// Danh sách các công việc
 const todoItems = ref([
   { id: 1, name: "Công việc 1" },
   { id: 2, name: "Công việc 2" },
   { id: 3, name: "Công việc 3" },
 ]);
 
-// Phương thức xử lý khi nhận được sự kiện delete từ component con
 const handleDelete = (id) => {
   todoItems.value = todoItems.value.filter(item => item.id !== id);
 };
 </script>
 
 <style scoped>
-/* Thêm CSS nếu cần */
+
 </style>

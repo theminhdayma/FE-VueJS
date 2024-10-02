@@ -12,5 +12,5 @@ import Modal from "./Modal.vue";
 </script>
 
 <style scoped>
-/* Thêm CSS nếu cần */
+
 </style>
