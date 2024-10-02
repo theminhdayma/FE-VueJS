@@ -2,10 +2,22 @@
   <div class="w-[80%] m-auto mt-4 h-[100vh]">
     <main class="main">
       <header class="d-flex justify-content-between mb-3">
-        <h3>Nhân viên</h3>
+        <h3 class="text-3xl ">Nhân viên</h3>
         <button class="btn btn-primary p-2" @click="openAddForm">Thêm mới nhân viên</button>
       </header>
-
+      <div class="d-flex align-items-center justify-content-end gap-2 mb-3">
+        <input
+          class="form-control"
+          placeholder="Tìm kiếm theo email"
+          type="text"
+          v-model="searchQuery"
+        />
+        <i
+          class="fa-solid fa-arrows-rotate"
+          title="Refresh"
+          @click="resetSearch"
+        />
+      </div>
       <table class="table table-bordered table-hover table-striped">
         <thead>
           <tr>
@@ -19,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(employee, index) in employees" :key="index">
+            <tr v-for="(employee, index) in filteredEmployees" :key="index">
             <td>{{ index + 1 }}</td>
             <td>{{ employee.name }}</td>
             <td>{{ employee.dob }}</td>
@@ -41,6 +53,9 @@
               <button class="button button-delete" @click="deleteEmployee(index)">Xóa</button>
             </td>
           </tr>
+          <!-- <tr>
+            <td colspan="9" class="text-center">Không có kết quả tìm kiếm</td>
+          </tr> -->
         </tbody>
       </table>
     </main>
@@ -108,7 +123,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const showForm = ref(false);
 const showConfirmModal = ref(false);
@@ -119,16 +134,18 @@ const form = ref({
   address: '',
   active: true,
 });
+
 const employees = ref(JSON.parse(localStorage.getItem('employees')) || []);
 const errors = ref({});
 const editIndex = ref(null);
 const currentAction = ref('Chặn');
 const currentEmployeeIndex = ref(null);
+const searchQuery = ref('');
 
 // Hàm mở form thêm nhân viên
 const openAddForm = () => {
   showForm.value = true;
-  editIndex.value = null; 
+  editIndex.value = null;
   resetForm();
 };
 
@@ -184,12 +201,6 @@ const deleteEmployee = (index) => {
   currentAction.value = 'xóa';
 };
 
-const confirmDeleteAction = () => {
-  employees.value.splice(currentEmployeeIndex.value, 1);
-  localStorage.setItem('employees', JSON.stringify(employees.value));
-  showConfirmModal.value = false;
-};
-
 // Hàm xác thực form
 const validateForm = () => {
   errors.value = {};
@@ -230,9 +241,43 @@ const resetForm = () => {
   };
   errors.value = {};
 };
+
+// Hàm reset tìm kiếm
+const resetSearch = () => {
+  searchQuery.value = '';
+};
+
+// Tính toán danh sách nhân viên dựa vào tìm kiếm email
+const filteredEmployees = computed(() => {
+  if (!searchQuery.value) {
+    return employees.value;
+  }
+  return employees.value.filter(employee =>
+    employee.email.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
+
+console.log(filteredEmployees);
+
 </script>
 
 <style scoped>
+input {
+  width: 350px;
+}
+
+.fa-arrows-rotate {
+  font-size: 20px;
+  cursor: pointer;
+  color: gray;
+}
+
+.fa-arrows-rotate:hover {
+  color: rgb(184, 180, 180);
+  transform: rotate(20deg);
+  transition: all 0.5s linear;
+}
+
 .table {
   width: 100%;
   border: 1px solid #ccc;
