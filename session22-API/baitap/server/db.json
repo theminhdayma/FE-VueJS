@@ -1,0 +1,80 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Áo thun nam",
+      "image": "https://example.com/image1.jpg",
+      "price": "200,000 VND",
+      "quantity": 500
+    },
+    {
+      "id": 2,
+      "name": "Quần jean nữ",
+      "image": "https://example.com/image2.jpg",
+      "price": "350,000 VND",
+      "quantity": 300
+    },
+    {
+      "id": 3,
+      "name": "Giày thể thao",
+      "image": "https://example.com/image3.jpg",
+      "price": "500,000 VND",
+      "quantity": 200
+    },
+    {
+      "id": 4,
+      "name": "Áo khoác hoodie",
+      "image": "https://example.com/image4.jpg",
+      "price": "400,000 VND",
+      "quantity": 150
+    },
+    {
+      "id": 5,
+      "name": "Mũ lưỡi trai",
+      "image": "https://example.com/image5.jpg",
+      "price": "150,000 VND",
+      "quantity": 100
+    },
+    {
+      "name": "Quần đùi ",
+      "image": "link ảnh sản phẩm",
+      "price": "100.000 VND",
+      "quantity": 120,
+      "id": 6
+    }
+  ],
+  "TableProduct": [
+    {
+      "id": 1,
+      "name": "Cam Tươi",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROqfL8HOvYUE89XwcheovZnEIXUsq0UcCV7g&s",
+      "price": "12.000",
+      "quantity": 12,
+      "dateAdded": "2024-03-25"
+    },
+    {
+      "id": 2,
+      "name": "Táo lê",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0zlnjMDO-16wlp1r7fCn-HXqrAC_80sj3JQ&s",
+      "price": "25.000",
+      "quantity": 150,
+      "dateAdded": "2024-02-15"
+    },
+    {
+      "id": 3,
+      "name": "Xoài",
+      "image": "https://phunugioi.com/wp-content/uploads/2022/01/Hinh-anh-qua-Xoai.jpg",
+      "price": "30.000",
+      "quantity": 102,
+      "dateAdded": "2024-06-28"
+    },
+    {
+      "name": "Sầu riêng",
+      "image": "https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2023/3/18/sau-rieng-1015-1679112463134-1679112463490838687291.jpg",
+      "price": "80.000",
+      "dateAdded": "2024-10-09",
+      "quantity": 100,
+      "id": 4
+    }
+  ]
+}
