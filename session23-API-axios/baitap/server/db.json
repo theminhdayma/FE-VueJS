@@ -53,15 +53,6 @@
       "phone": "0935678901",
       "status": true,
       "created_at": "2024-08-01"
-    },
-    {
-      "name": "ừerfdg",
-      "email": "hgfdgrf@gmail.com",
-      "address": "dqwa",
-      "phone": "0987654321",
-      "status": true,
-      "created_at": "2024-10-10",
-      "id": 7
     }
   ]
 }
