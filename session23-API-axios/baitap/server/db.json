@@ -1,0 +1,67 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Nguyễn Văn A",
+      "email": "nguyenvana@gmail.com",
+      "address": "Hà Nội",
+      "phone": "0987654321",
+      "status": true,
+      "created_at": "2024-06-12"
+    },
+    {
+      "id": 2,
+      "name": "Trần Thị B",
+      "email": "tranthib@gmail.com",
+      "address": "Hồ Chí Minh",
+      "phone": "0971234567",
+      "status": false,
+      "created_at": "2024-06-15"
+    },
+    {
+      "id": 3,
+      "name": "Lê Văn C",
+      "email": "levanc@gmail.com",
+      "address": "Đà Nẵng",
+      "phone": "0962345678",
+      "status": true,
+      "created_at": "2024-07-01"
+    },
+    {
+      "id": 4,
+      "name": "Phạm Thị D",
+      "email": "phamthid@gmail.com",
+      "address": "Hải Phòng",
+      "phone": "0953456789",
+      "status": true,
+      "created_at": "2024-07-10"
+    },
+    {
+      "id": 5,
+      "name": "Ngô Văn E",
+      "email": "ngovane@gmail.com",
+      "address": "Cần Thơ",
+      "phone": "0944567890",
+      "status": false,
+      "created_at": "2024-07-18"
+    },
+    {
+      "id": 6,
+      "name": "Hoàng Thị F",
+      "email": "hoangthif@gmail.com",
+      "address": "Huế",
+      "phone": "0935678901",
+      "status": true,
+      "created_at": "2024-08-01"
+    },
+    {
+      "name": "ừerfdg",
+      "email": "hgfdgrf@gmail.com",
+      "address": "dqwa",
+      "phone": "0987654321",
+      "status": true,
+      "created_at": "2024-10-10",
+      "id": 7
+    }
+  ]
+}
