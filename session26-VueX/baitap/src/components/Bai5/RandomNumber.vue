@@ -22,6 +22,8 @@
   
   <style scoped>
   ul {
+    display: flex;
+    gap: 8px;
     list-style-type: none;
     padding: 0;
   }

@@ -24,7 +24,11 @@ const store = createStore({
         { id: 3, productName: 'Headphone', price: 150, quantity: 20 },
     ],
     counter: 0,
-    randomNumbers: []
+    randomNumbers: [],
+    company: 'Rikkei Academy',
+    theme: localStorage.getItem('theme') || 'light',
+    language: localStorage.getItem('language') || 'vi',
+
   },
   getters: {
     getUsers: (state) => {
@@ -38,6 +42,15 @@ const store = createStore({
     },
     getRandomNumbers: (state) => {
         return state.randomNumbers;
+    },
+    getCompany: (state) => {
+        return state.company;
+    },
+    getTheme: (state) => {
+        return state.theme;
+    },
+    getLanguage: (state) => {
+        return state.language;
     }
   },
   mutations: {
@@ -49,6 +62,17 @@ const store = createStore({
     },
     addRandomNumber(state, randomNumber) {
         state.randomNumbers.push(randomNumber);
+    },
+    changeCompany(state, newCompany) {
+        state.company = newCompany;
+    },
+    toggleTheme(state) {
+        state.theme = state.theme === 'light' ? 'dark' : 'light';
+        localStorage.setItem('theme', state.theme);
+    },
+    toggleLanguage(state) {
+        state.language = state.language === 'vi' ? 'en' : 'vi';
+        localStorage.setItem('language', state.language); // Lưu trạng thái vào localStorage
     }
   },
   actions: {
@@ -59,8 +83,12 @@ const store = createStore({
       commit('decrement');
     },
     generateRandomNumber({ commit }) {
-        const randomNumber = Math.floor(Math.random() * 100); // Tạo số ngẫu nhiên từ 0 đến 99
+        const randomNumber = Math.floor(Math.random() * 100); 
         commit('addRandomNumber', randomNumber);
+    },
+    updateCompany({ commit }) {
+        const newCompany = 'RikkeiSoft'; 
+        commit('changeCompany', newCompany);
     }
   },
 })

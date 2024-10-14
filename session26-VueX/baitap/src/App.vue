@@ -14,6 +14,16 @@
         <br>
         <h1>Bài 5</h1>
         <RandomNumber/>
+        <br>
+        <h1>Bài 6</h1>
+        <ChangeState/>
+        <br>
+        <h1>Bài 7</h1>
+        <DarkMode/>
+        <br>
+        <h1>Bài 8</h1>
+        <ChangeLanguage/>
+        <br>
     </div>
 </template>
 
@@ -23,6 +33,9 @@
     import ListProduct from './components/Bai3/ListProduct.vue';
     import Counter from './components/Bai4/Counter.vue';
     import RandomNumber from './components/Bai5/RandomNumber.vue';
+    import ChangeState from './components/Bai6/ChangeState.vue';
+    import DarkMode from './components/Bai7/DarkMode.vue';
+    import ChangeLanguage from './components/Bai8/ChangeLanguage.vue';
 </script>
 
 <style scoped>
