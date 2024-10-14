@@ -1,0 +1,49 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "nameJob": "Lau Nhà",
+      "status": false
+    },
+    {
+      "id": 2,
+      "nameJob": "Rửa bát",
+      "status": false
+    },
+    {
+      "nameJob": "deqs",
+      "status": true,
+      "id": 7
+    },
+    {
+      "nameJob": "gbcv",
+      "status": true,
+      "id": 11
+    },
+    {
+      "nameJob": "rdszx",
+      "status": true,
+      "id": 13
+    },
+    {
+      "nameJob": "fesa",
+      "status": true,
+      "id": 14
+    },
+    {
+      "nameJob": "yd",
+      "status": true,
+      "id": 15
+    },
+    {
+      "nameJob": "cvbj",
+      "status": false,
+      "id": 16
+    },
+    {
+      "nameJob": "rds",
+      "status": false,
+      "id": 17
+    }
+  ]
+}
