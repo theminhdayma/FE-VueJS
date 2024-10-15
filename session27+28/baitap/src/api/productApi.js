@@ -29,3 +29,23 @@ export const updateProduct = async (product) => {
         console.log("Lỗi");
     }
 }
+
+// Xóa 1 sản phẩm theo id
+export const deleteProduct = async (productId) => {
+    try {
+        const res = await axios.delete(`http://localhost:8080/products/${productId}`);
+        return res.data;
+    } catch (error) {
+        console.log("Lỗi khi xóa sản phẩm", error);
+    }
+};
+
+// Xóa 1 sản phẩm khỏi giỏ hàng theo id
+export const deleteCartItem = async (cartItemId) => {
+    try {
+        const res = await axios.delete(`http://localhost:8080/carts/${cartItemId}`);
+        return res.data;
+    } catch (error) {
+        console.log("Lỗi khi xóa sản phẩm khỏi giỏ hàng", error);
+    }
+};
