@@ -22,15 +22,12 @@
   import { computed, onMounted } from 'vue';
   import { useStore } from 'vuex';
   
-  // Sử dụng Vuex store
   const store = useStore();
   
-  // Lấy danh sách sản phẩm từ store (computed property)
   const products = computed(() => store.state.product.products);
   
-  // Tự động lấy sản phẩm khi component được tạo ra
   onMounted(() => {
-    store.dispatch('getAllProduct'); // Gọi action để lấy sản phẩm từ API
+    store.dispatch('getAllProduct'); 
   });
   
   const addToCart = (product) => {
