@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Thế Minh",
+      "age": 19
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Throwback Hip Bag",
+      "description": "Lorem ipsum dolor sit amet consectetur.",
+      "price": 30,
+      "quantity": 100,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTErBUqHxUZdLNQgQdA7_V1-Ah2hbuDLZ3-5A&s",
+      "status": true
+    },
+    {
+      "id": 2,
+      "name": "Lie Lie Bag",
+      "description": "Lorem ipsum dolor sit amet consectetur.",
+      "price": 25,
+      "quantity": 100,
+      "image": "https://jola.vn/cdn/720/Product/tJ9hvk9-c/1005-tui-da-mini-quai-xich-phong-cach-han-quoc-9x15x3cm.jpg",
+      "status": true
+    },
+    {
+      "id": 3,
+      "name": "Beautiful Handbag",
+      "description": "Lorem ipsum dolor sit amet consectetur.",
+      "price": 20,
+      "quantity": 90,
+      "image": "https://louiskimmi.com/wp-content/uploads/2021/03/t%C3%BAi-x%C3%A1ch-n%E1%BB%AF-chanel-01-5.jpg",
+      "status": true
+    }
+  ],
+  "carts": [
+    {
+      "id": 1,
+      "idProduct": 3,
+      "name": "Beautiful Handbag",
+      "description": "Lorem ipsum dolor sit amet consectetur.",
+      "price": 20,
+      "quantity": 10,
+      "image": "https://louiskimmi.com/wp-content/uploads/2021/03/t%C3%BAi-x%C3%A1ch-n%E1%BB%AF-chanel-01-5.jpg",
+      "status": true
+    }
+  ]
+}
